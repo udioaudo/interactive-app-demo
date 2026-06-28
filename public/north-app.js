@@ -165,6 +165,7 @@ function selectScreen(i){
     screen.classList.remove('swap');
     if(i===0)initUpload();
     if(i===1)renderPaths();
+    if(i===3)initAigc();
   },130);
 }
 screens.forEach((s,i)=>{const b=document.createElement('button');b.textContent=`${i+1}. ${s.name}`;b.onclick=()=>selectScreen(i);nav.appendChild(b)});
