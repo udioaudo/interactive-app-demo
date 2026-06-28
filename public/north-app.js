@@ -216,7 +216,7 @@ function initTree(){
     const el=document.createElement('button');el.className='career-node';
     const star=n.kind==='origin'?'origin':(n.kind==='recommended'?'big':'');
     el.innerHTML=`<i class="star ${star}"></i><b>${n.title}</b><small>${n.fit}% · ${n.salary}</small>`;
-    el.onclick=e=>{e.stopPropagation();inspectCareer(n.id)};scene.appendChild(el);els.set(n.id,el);
+    el.onclick=e=>{e.stopPropagation();inspectCareer(n.id,{scroll:true})};scene.appendChild(el);els.set(n.id,el);
   });
   function project(n){
     const ry=yaw*Math.PI/180,rx=pitch*Math.PI/180;
