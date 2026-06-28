@@ -74,15 +74,28 @@ const screens=[
       </div>`
   },
   {
-    name:"People & Events",
-    html:`<p class="kicker">人脉与同城活动</p><h2 class="title">认识能验证路径的人，也发现同城机会。</h2>
-      <div class="contact-card"><header><div><b>李然 · 银行总行管培</b><p>同校校友 · 2 年经验 · 可交流总行路径</p></div></header><div class="contact-actions"><a href="mailto:liran@example.com?subject=关于银行总行职业路径的交流">发邮件</a><a href="tel:+8613800000000">拨打</a></div></div>
-      <div class="contact-card"><header><div><b>周晨 · 量化研究员</b><p>同城 · 有金融工程背景 · 可交流量化转型</p></div></header><div class="contact-actions"><a href="mailto:zhouchen@example.com?subject=关于量化职业路径的交流">发邮件</a><a href="tel:+8613900000000">拨打</a></div></div>
-      <div class="contact-card"><header><div><b>王楠 · 金融基础设施</b><p>二度联系人 · 熟悉清算与交易系统岗位</p></div></header><div class="contact-actions"><a href="mailto:wangnan@example.com?subject=关于金融基础设施岗位的交流">发邮件</a></div></div>
-      <p class="kicker" style="margin-top:16px">同城活动 · 上海</p>
-      <div class="event-card"><div class="event-date">07/18</div><div><b>AI Startup × Finance Night</b><small>徐汇 · AI 创业公司与金融人才交流</small></div></div>
-      <div class="event-card"><div class="event-date">07/22</div><div><b>量化与机器学习小型分享会</b><small>静安 · 30 人 · 需报名</small></div></div>
-      <div class="event-card"><div class="event-date">07/26</div><div><b>金融学生职业路径圆桌</b><small>浦东 · 银行 / 投行 / 买方从业者</small></div></div>`
+    name:"AI 顾问",
+    html:`<p class="kicker">AIGC · 金融垂类问答</p><h2 class="title">问任何关于细分赛道的问题。</h2>
+      <p class="sub">基于职业坐标的领域 RAG，输出可被验证的判断与下一步行动。当前为前端 demo，未接入真实检索后端。</p>
+
+      <div class="aigc-hero">
+        <span class="badge">VERTICAL AI · BETA</span>
+        <h3 id="aigcHeroTitle">选一个垂类，开始对话</h3>
+        <p id="aigcHeroSub">不同赛道有不同的语料、术语与回答风格。先告诉我，你要问哪个方向？</p>
+      </div>
+
+      <p class="kicker" style="margin-top:14px">选择细分领域</p>
+      <div class="vertical-grid" id="verticalGrid"></div>
+
+      <p class="kicker" style="margin-top:14px">热门问题（点击直接发送）</p>
+      <div class="preset-q" id="presetQ"></div>
+
+      <div class="aigc-input">
+        <textarea id="aigcInput" rows="2" placeholder="例如：买方研究员一周的工作节奏是怎样的？"></textarea>
+        <button id="aigcSend">发送</button>
+      </div>
+
+      <div class="chat-stream" id="chatStream"></div>`
   },
   {
     name:"Growth",
