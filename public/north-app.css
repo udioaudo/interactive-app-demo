@@ -100,33 +100,34 @@ h3{font-size:13px;margin:20px 0 9px}.muted{color:var(--muted);font-size:13px;lin
 .splash{
   position:fixed;inset:0;z-index:100;
   display:grid;place-items:center;overflow:hidden;
-  background:#f4eadf;
+  background:#ede9fe;
   transition:opacity .55s ease,visibility .55s ease;
 }
 .splash.hidden{opacity:0;visibility:hidden}
 .splash-marble{
   position:absolute;inset:-12%;
   background:
-    radial-gradient(ellipse at 20% 25%,rgba(167,103,55,.38),transparent 22%),
-    radial-gradient(ellipse at 70% 20%,rgba(255,255,255,.95),transparent 30%),
-    radial-gradient(ellipse at 70% 80%,rgba(111,78,52,.18),transparent 26%),
-    repeating-radial-gradient(ellipse at 35% 40%,rgba(161,105,62,.11) 0 4px,transparent 5px 28px),
-    linear-gradient(135deg,#e4c7a7,#fffaf4 48%,#d8b18c);
+    radial-gradient(ellipse at 20% 25%,rgba(99,102,241,.45),transparent 24%),
+    radial-gradient(ellipse at 75% 25%,rgba(236,72,153,.40),transparent 28%),
+    radial-gradient(ellipse at 70% 80%,rgba(34,211,238,.30),transparent 26%),
+    repeating-radial-gradient(ellipse at 35% 40%,rgba(167,139,250,.10) 0 4px,transparent 5px 28px),
+    linear-gradient(135deg,#e0e7ff,#fce7f3 48%,#cffafe);
   filter:blur(1px);
   transform:scale(1.08);
 }
 .splash-content{
   position:relative;max-width:680px;text-align:center;padding:42px;
-  border-radius:34px;background:rgba(255,250,244,.44);
-  border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(22px);
-  box-shadow:0 40px 110px rgba(74,44,20,.18);
+  border-radius:34px;background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(22px);
+  box-shadow:0 40px 110px rgba(99,102,241,.22);
 }
 .splash-mark{font-size:34px;color:var(--copper);margin-bottom:10px}
 .splash-content h1{font-size:54px;line-height:1.02;margin:10px 0 18px}
 .splash-content p{max-width:560px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.7}
 .splash-content button{
   margin-top:26px;border:0;border-radius:999px;padding:14px 24px;
-  background:#17171b;color:white;font-weight:750;cursor:pointer;
+  background:linear-gradient(135deg,#6366f1,#ec4899);color:white;font-weight:750;cursor:pointer;
+  box-shadow:0 12px 30px rgba(99,102,241,.4);
 }
 
 .today-impact{
