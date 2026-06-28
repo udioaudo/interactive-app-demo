@@ -102,7 +102,7 @@ let yaw=-8,pitch=7,zoom=1,dragging=false,lastX=0,lastY=0;
 let profile={degree:'本科 · 金融',school:'985 / 211',internship:'券商投行实习 2 段',skills:'Excel、财务建模',preference:'稳定优先'};
 
 function renderList(id,items){document.getElementById(id).innerHTML=items.map(x=>`<div>${x}</div>`).join('')}
-function inspectCareer(id){
+function inspectCareer(id, opts){
   const c=CAREERS.find(x=>x.id===id);
   document.getElementById('nodeTitle').textContent=c.title;
   document.getElementById('nodeReason').textContent=id==='origin'?'这是由第一页输入生成的职业坐标原点。':`根据你的 ${profile.degree}、${profile.internship||'经历'} 与“${profile.preference}”偏好评估。`;
@@ -113,6 +113,35 @@ function inspectCareer(id){
   document.getElementById('stability').textContent=c.stability;
   document.getElementById('market').textContent=c.market;
   renderList('skillsList',c.skills);renderList('prosList',c.pros);renderList('consList',c.cons);
+  const detail=document.getElementById('careerDetail');
+  if(detail){
+    const reason=id==='origin'?'这是由第一页输入生成的职业坐标原点。':`根据你的 ${profile.degree}、${profile.internship||'经历'} 与“${profile.preference}”偏好评估。`;
+    const kindMap={recommended:'推荐路径',stretch:'挑战路径',origin:'职业原点',adjacent:'相邻路径'};
+    detail.innerHTML=`
+      <div class="detail-head">
+        <p class="kicker">职业详情 · ${kindMap[c.kind]||'路径'}</p>
+        <h3 class="title" style="font-size:22px;margin:4px 0 6px">${c.title}</h3>
+        <p class="sub">${reason}</p>
+      </div>
+      <div class="detail-metrics">
+        <div><span>适配度</span><b>${c.fit}%</b></div>
+        <div><span>薪资区间</span><b>${c.salary}</b></div>
+      </div>
+      <div class="detail-row"><span>发展路径</span><b>${c.development}</b></div>
+      <div class="detail-row"><span>工作强度</span><b>${c.intensity}</b></div>
+      <div class="detail-row"><span>稳定性</span><b>${c.stability}</b></div>
+      <div class="detail-row"><span>市场行情</span><b>${c.market}</b></div>
+      <p class="kicker" style="margin-top:14px">核心能力</p>
+      <div class="chip-row">${c.skills.map(s=>`<span class="chip">${s}</span>`).join('')}</div>
+      <p class="kicker" style="margin-top:14px">优势</p>
+      <ul class="pc-list pros">${c.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <p class="kicker" style="margin-top:10px">挑战</p>
+      <ul class="pc-list cons">${c.cons.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    if(opts && opts.scroll){
+      requestAnimationFrame(()=>detail.scrollIntoView({behavior:'smooth',block:'start'}));
+      detail.classList.remove('flash');void detail.offsetWidth;detail.classList.add('flash');
+    }
+  }
 }
 function selectScreen(i){
   screen.classList.add('swap');
