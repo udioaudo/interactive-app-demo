@@ -7,60 +7,34 @@
   <link rel="stylesheet" href="/north-app.css"/>
   <style>
     /* Hide side rails — only show the phone */
-    html,body{height:100%}
-    .app-shell{grid-template-columns:1fr !important;justify-items:center;padding:16px !important;min-height:100vh}
+    .app-shell{grid-template-columns:1fr !important;justify-items:center}
     .left-rail,.right-panel{display:none !important}
-    .phone-stage{width:100%;min-height:calc(100vh - 32px);display:grid;place-items:center}
-
-    /* Universal phone frame — adapts to any viewport, not iOS-specific */
-    .phone{
-      width:min(390px, 92vw);
-      height:min(820px, calc(100vh - 40px));
-      aspect-ratio:auto;
-      border-width:8px;
-      border-radius:34px;
-      box-shadow:0 24px 70px rgba(34,20,8,.25), 0 0 0 1px rgba(0,0,0,.25);
-      transition:box-shadow .4s ease;
-    }
-    .phone.sparkle{box-shadow:0 24px 70px rgba(34,20,8,.25),0 0 0 6px rgba(99,102,241,.20),0 0 80px rgba(236,72,153,.35)}
-
-    /* Replace iOS Dynamic Island with a neutral top speaker bar (still clickable) */
-    .island{
-      top:6px;width:54px;height:5px;border-radius:999px;
-      background:#2a2a2e;cursor:pointer;
-    }
+    .phone-stage{width:100%}
+    /* Small thought: a soft halo around the phone + clickable island easter-egg */
+    .phone{transition:box-shadow .4s ease}
+    .phone.sparkle{box-shadow:0 35px 100px rgba(34,20,8,.27),0 0 0 6px rgba(220,169,86,.18),0 0 80px rgba(220,169,86,.35)}
+    .island{cursor:pointer}
     .island:after{
-      content:"";position:absolute;inset:-6px -20px;border-radius:999px;
-      box-shadow:0 0 0 0 rgba(236,72,153,.55);transition:.5s;
+      content:"";position:absolute;inset:-2px;border-radius:999px;
+      box-shadow:0 0 0 0 rgba(220,169,86,.55);transition:.5s;
     }
-    .island.pulse:after{box-shadow:0 0 0 14px rgba(236,72,153,0)}
-
-    .status{height:34px;padding:10px 18px 0;font-size:11px}
-    #screen{height:calc(100% - 90px) !important;padding:12px 16px 14px}
-    .bottom-nav{height:52px}
-
+    .island.pulse:after{box-shadow:0 0 0 14px rgba(220,169,86,0)}
     .daily-quote{
-      position:absolute;top:24px;left:50%;transform:translateX(-50%);
+      position:absolute;top:46px;left:50%;transform:translateX(-50%);
       max-width:78%;padding:10px 14px;border-radius:14px;z-index:6;
       background:rgba(23,23,27,.92);color:#f1e7db;font-size:11px;line-height:1.5;
       text-align:center;opacity:0;pointer-events:none;transition:.3s;
       box-shadow:0 8px 24px rgba(0,0,0,.25);
     }
     .daily-quote.show{opacity:1;transform:translateX(-50%) translateY(2px)}
+    /* Toast for icon feedback */
     .nav-toast{
-      position:absolute;left:50%;bottom:64px;transform:translateX(-50%);
+      position:absolute;left:50%;bottom:68px;transform:translateX(-50%);
       padding:7px 12px;border-radius:999px;background:rgba(23,23,27,.9);color:#f1e7db;
       font-size:10px;opacity:0;transition:.25s;pointer-events:none;z-index:6;
     }
-    .nav-toast.show{opacity:1;bottom:70px}
-
-    @media (max-width:480px){
-      .phone{width:100vw;height:100vh;border-radius:0;border-width:0;box-shadow:none}
-      .app-shell{padding:0 !important}
-      .island{display:none}
-    }
+    .nav-toast.show{opacity:1;bottom:74px}
   </style>
-
 </head>
 <body>
   <section id="splash" class="splash">
@@ -87,7 +61,7 @@
           <button data-index="0" title="Onboarding · 建立坐标">◎</button>
           <button data-index="1" title="All Paths · 职业全息图">◇</button>
           <button data-index="2" title="Today · 今日任务">♙</button>
-          <button data-index="3" title="AI 顾问 · 金融垂类问答">▤</button>
+          <button data-index="3" title="People & Events · 人脉与活动">▤</button>
           <button data-index="4" title="Growth · 成长复盘">◉</button>
         </div>
       </div>
@@ -106,7 +80,7 @@
   <script src="/north-app.js"></script>
   <script>
     // Small enhancements: bottom-nav label toast + dynamic island easter egg
-    const NAV_LABELS = ['Onboarding','All Paths','Today','AI 顾问','Growth'];
+    const NAV_LABELS = ['Onboarding','All Paths','Today','People & Events','Growth'];
     const toast = document.getElementById('navToast');
     document.querySelectorAll('.bottom-nav button').forEach((b,i)=>{
       b.addEventListener('click',()=>{

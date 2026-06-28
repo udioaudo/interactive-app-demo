@@ -74,28 +74,15 @@ const screens=[
       </div>`
   },
   {
-    name:"AI 顾问",
-    html:`<p class="kicker">AIGC · 金融垂类问答</p><h2 class="title">问任何关于细分赛道的问题。</h2>
-      <p class="sub">基于职业坐标的领域 RAG，输出可被验证的判断与下一步行动。当前为前端 demo，未接入真实检索后端。</p>
-
-      <div class="aigc-hero">
-        <span class="badge">VERTICAL AI · BETA</span>
-        <h3 id="aigcHeroTitle">选一个垂类，开始对话</h3>
-        <p id="aigcHeroSub">不同赛道有不同的语料、术语与回答风格。先告诉我，你要问哪个方向？</p>
-      </div>
-
-      <p class="kicker" style="margin-top:14px">选择细分领域</p>
-      <div class="vertical-grid" id="verticalGrid"></div>
-
-      <p class="kicker" style="margin-top:14px">热门问题（点击直接发送）</p>
-      <div class="preset-q" id="presetQ"></div>
-
-      <div class="aigc-input">
-        <textarea id="aigcInput" rows="2" placeholder="例如：买方研究员一周的工作节奏是怎样的？"></textarea>
-        <button id="aigcSend">发送</button>
-      </div>
-
-      <div class="chat-stream" id="chatStream"></div>`
+    name:"People & Events",
+    html:`<p class="kicker">人脉与同城活动</p><h2 class="title">认识能验证路径的人，也发现同城机会。</h2>
+      <div class="contact-card"><header><div><b>李然 · 银行总行管培</b><p>同校校友 · 2 年经验 · 可交流总行路径</p></div></header><div class="contact-actions"><a href="mailto:liran@example.com?subject=关于银行总行职业路径的交流">发邮件</a><a href="tel:+8613800000000">拨打</a></div></div>
+      <div class="contact-card"><header><div><b>周晨 · 量化研究员</b><p>同城 · 有金融工程背景 · 可交流量化转型</p></div></header><div class="contact-actions"><a href="mailto:zhouchen@example.com?subject=关于量化职业路径的交流">发邮件</a><a href="tel:+8613900000000">拨打</a></div></div>
+      <div class="contact-card"><header><div><b>王楠 · 金融基础设施</b><p>二度联系人 · 熟悉清算与交易系统岗位</p></div></header><div class="contact-actions"><a href="mailto:wangnan@example.com?subject=关于金融基础设施岗位的交流">发邮件</a></div></div>
+      <p class="kicker" style="margin-top:16px">同城活动 · 上海</p>
+      <div class="event-card"><div class="event-date">07/18</div><div><b>AI Startup × Finance Night</b><small>徐汇 · AI 创业公司与金融人才交流</small></div></div>
+      <div class="event-card"><div class="event-date">07/22</div><div><b>量化与机器学习小型分享会</b><small>静安 · 30 人 · 需报名</small></div></div>
+      <div class="event-card"><div class="event-date">07/26</div><div><b>金融学生职业路径圆桌</b><small>浦东 · 银行 / 投行 / 买方从业者</small></div></div>`
   },
   {
     name:"Growth",
@@ -165,7 +152,6 @@ function selectScreen(i){
     screen.classList.remove('swap');
     if(i===0)initUpload();
     if(i===1)renderPaths();
-    if(i===3)initAigc();
   },130);
 }
 screens.forEach((s,i)=>{const b=document.createElement('button');b.textContent=`${i+1}. ${s.name}`;b.onclick=()=>selectScreen(i);nav.appendChild(b)});
@@ -274,120 +260,3 @@ if(enter){
   enter.onclick=()=>splash.classList.add('hidden');
 }
 setTimeout(()=>{ if(splash) splash.classList.add('hidden'); },5000);
-
-/* ============== AIGC 金融垂类问答 ============== */
-const VERTICALS = [
-  { id:'buy_side', emoji:'📈', name:'二级买方', tag:'公募/私募研究员',
-    q:['买方研究员每周节奏？','刚入行如何建立行业框架？','买方面试的能力评估维度是什么？'],
-    a:'买方研究员通常每周节奏为：周一晨会复盘 + 排日程；周二到周四调研、跟踪持仓股、写更新；周五写周报与组合建议。\n核心能力链：行业框架 → 公司深度 → 组合贡献。新人前 6 个月建议聚焦 1–2 个细分赛道（例如新能源中游 / 消费医疗 / 半导体设计），把行业图谱、关键变量、上下游与可比公司啃透，再开始扩展。',
-    src:['《主动权益基金研究员能力模型》（内部资料 v3.2）','Wind 行业研究方法手册 2024','某头部公募新员工入职 90 天计划'] },
-  { id:'quant', emoji:'🧮', name:'量化', tag:'因子/高频/CTA',
-    q:['量化研究员需要哪些数学基础？','因子方向 vs 高频方向怎么选？','本科生怎么准备量化校招？'],
-    a:'核心数学栈：概率论与数理统计、随机过程、时间序列、最优化、线性代数。工程栈至少二选一精通：Python（pandas/numpy/torch）或 C++（低延迟）。\n方向选择：偏研究思维 → 多因子 / 中低频；偏工程与基础设施 → 高频做市；偏宏观叙事 → CTA。校招优先级：刷 LeetCode + Kaggle 项目 + 一段量化私募实习 + 公开复现一个经典因子。',
-    src:['《主动量化研究框架》（华泰金工 2023）','某 Top 私募量化研究员校招题库','arXiv: Empirical Asset Pricing via Machine Learning'] },
-  { id:'ib', emoji:'💼', name:'投行', tag:'IBD/ECM/DCM',
-    q:['投行 IBD 实习一般做什么？','IPO 项目执行流程是怎样的？','投行 vs 行研怎么选？'],
-    a:'IBD 实习日常：行业研究、可比公司分析（Comps）、估值建模（DCF/LBO）、Pitch Book 制作、尽调资料整理、与中介机构对接。\nIPO 流程主线：立项 → 尽调（业务/财务/法律）→ 申报材料 → 受理问询 → 上会 → 发行定价 → 挂牌。每个环节实习生都会接触到底稿、问询回复或路演材料。',
-    src:['《IPO 实务操作指南》（上交所 2024）','某券商投行 Analyst 培训手册','PitchBook 行业数据库'] },
-  { id:'bank_hq', emoji:'🏦', name:'银行总行', tag:'管培/业务部门',
-    q:['总行管培生轮岗怎么选？','零售 vs 对公差别有多大？','总行晋升路径长什么样？'],
-    a:'总行管培生通常在 1–2 年内轮岗 3–5 个部门，建议选择"业务条线 + 中后台"组合：例如对公业务部 + 风险管理部，便于建立完整业务地图。\n零售强调获客与产品转化，节奏更快；对公强调客户经营与项目融资，更看重行业理解。晋升路径一般为：管培 → 业务岗 → 处室副职（5–7y）→ 部门副职（10y+），稳定但需要持续业务证据。',
-    src:['六大行 2024 校招简章对比','《商业银行总行岗位地图》（内部）','某股份行管培三年轮岗复盘'] },
-  { id:'wealth', emoji:'💎', name:'银行理财子', tag:'固收/权益/多资产',
-    q:['理财子和公募差别在哪？','固收 + 策略怎么搭建？','理财子的投研团队结构？'],
-    a:'差异主要在：客户结构（理财子以银行渠道零售客户为主，风险偏好低）、产品形态（净值化但仍以低波稳健为主）、考核机制（更注重回撤控制与持有体验）。\n固收+ 通常以中短债打底（60–80%）+ 权益/转债/衍生品（10–30%）+ 黄金/REITs 等另类（0–10%）。核心是回撤管理而非单纯收益最大化。',
-    src:['理财子公司监管办法（2022）','某理财子固收+产品说明书','银行业协会理财半年报'] },
-  { id:'fin_infra', emoji:'🧱', name:'金融基础设施', tag:'交易所/清算/登记',
-    q:['交易所 vs 中登 vs 上清所？','金融基础设施的核心岗位？','非技术背景能去吗？'],
-    a:'交易所负责撮合与监管自律；中登负责证券登记结算；上清所负责场外衍生品中央对手清算。三者岗位均涵盖业务规则、市场监察、产品创新、风控合规。\n非技术背景完全可以进入，业务/法律/合规/产品方向尤其欢迎金融、法学、统计背景。优势在于稳定性 + 系统视角，劣势是绝对收入弹性较小。',
-    src:['上交所/深交所 2024 校招岗位说明','《中国资本市场基础设施白皮书》','某清算所新员工业务培训资料'] },
-  { id:'consulting', emoji:'🧭', name:'咨询', tag:'MBB/战略/财务',
-    q:['MBB 案例面试怎么准备？','战略咨询 vs 财务咨询？','咨询出口都去哪？'],
-    a:'案例面试核心三层：结构化拆解（MECE）→ 数据假设与计算 → 形成可被验证的建议。准备路径：Case in Point + Victor Cheng + 至少 30 个 mock case。\n战略咨询面对 CEO 议题（增长、并购、组织），财务咨询更聚焦 deal advisory（尽调、估值、整合）。常见出口：产业战略部、PE 投后、互联网战略、自己创业。',
-    src:['Case in Point 9th edition','MBB 中国区 2024 校招流程整理','某 MBB Associate 三年晋升复盘'] },
-  { id:'research', emoji:'🔬', name:'卖方行研', tag:'行业研究员',
-    q:['卖方研究员日常做什么？','新财富评选还重要吗？','行研转买方需要准备什么？'],
-    a:'日常：覆盖公司财报点评、行业事件解读、深度报告、路演销售、买方调研陪同。一年要写 50+ 篇报告 + 100+ 场路演。\n新财富仍是行业重要排名，但近年合规收紧后，更多看派点、深度报告影响力与产业资源。转买方需准备：1 个看得懂的细分赛道 + 1 篇能讲清楚的深度 + 对组合贡献的理解。',
-    src:['新财富 2024 评选规则','某券商首席 30 篇代表作清单','《卖方研究员的一天》（业内访谈）'] },
-  { id:'internet_fin', emoji:'🌐', name:'互联网金融', tag:'蚂蚁/支付/数科',
-    q:['互联网金融岗位还有机会吗？','数据分析在金融业务里怎么用？','大厂金融科技 vs 银行总行？'],
-    a:'监管趋严后，互金从 C 端流量转向 B 端服务（开放银行、风控 SaaS、数字人民币应用）。岗位机会仍存在，但更偏产品/数据/风控，而非纯增长。\n数据分析典型场景：用户分层与LTV、反欺诈、信用评分卡、流失预警、产品 A/B test。建议熟练 SQL + Python + 一个建模框架（XGBoost / LightGBM）。',
-    src:['蚂蚁/京东数科 2024 校招岗位','银保监会金融科技发展规划（2022–2025）','某大厂数据分析师面试题汇总'] },
-  { id:'soe_hq', emoji:'🏛️', name:'央企产业', tag:'战略投资/资本运作',
-    q:['央企总部战投部做什么？','金融出身去产业有优势吗？','央企晋升节奏怎么样？'],
-    a:'战投部典型工作：行业研究、并购标的筛选、投资执行（尽调/谈判/交割）、投后管理、集团资本运作（分拆/上市/整合）。\n金融出身的优势：估值与交易经验、资本市场资源、财务建模。挑战在于需要补产业 know-how。晋升节奏稳但层级多，5 年到副处、10 年到正处是常见路径。',
-    src:['国资委央企名录（2024）','某能源央企战投部岗位说明书','《产业资本与金融资本的协同》（清华五道口）'] },
-  { id:'amc', emoji:'♻️', name:'AMC', tag:'不良资产/特殊机会',
-    q:['AMC 主要做哪些业务？','不良资产处置有哪些方式？','法律背景在 AMC 的价值？'],
-    a:'四大 AMC + 地方 AMC 主要业务：不良债权收购、重组、处置、特殊机会投资、问题企业纾困。\n处置方式：诉讼追偿、债务重组、债转股、资产证券化、整体打包出售。法律背景在债权确认、抵押物处置、破产重整环节有显著优势，金融 + 法律复合背景在 AMC 议价能力很强。',
-    src:['银保监会 AMC 监管办法','《不良资产处置实务》2023 版','某地方 AMC 项目复盘合集'] },
-  { id:'big4', emoji:'📊', name:'四大', tag:'审计/咨询/税务',
-    q:['四大审计真的很累吗？','审计 vs 咨询 vs 税务？','四大出来一般去哪？'],
-    a:'审计旺季（11–4 月）确实压力大，加班到 11 点是常态；淡季相对轻松。咨询节奏更项目制，税务最稳定。\n出口：审计 → 上市公司财务、投行、PE 投后；咨询 → 战略部 / 互联网战略 / 创业；税务 → 企业税务总监 / 税务师事务所合伙人。品牌信号在国内外都比较通用。',
-    src:['四大 2024 校招对比','某 Big4 Senior 三年成长复盘','ACCA / CPA 备考路线图'] },
-];
-
-let activeVertical = null;
-
-function initAigc(){
-  const grid=document.getElementById('verticalGrid');
-  if(!grid) return;
-  grid.innerHTML = VERTICALS.map(v=>`
-    <button class="vertical-chip" data-id="${v.id}">
-      <span class="v-emoji">${v.emoji}</span>
-      <span class="v-name">${v.name}</span>
-    </button>`).join('');
-  grid.querySelectorAll('.vertical-chip').forEach(btn=>{
-    btn.onclick=()=>selectVertical(btn.dataset.id);
-  });
-  const send=document.getElementById('aigcSend');
-  const input=document.getElementById('aigcInput');
-  send.onclick=()=>submitAigc(input.value);
-  input.addEventListener('keydown',e=>{
-    if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); submitAigc(input.value); }
-  });
-  document.getElementById('chatStream').innerHTML='';
-  document.getElementById('presetQ').innerHTML='';
-  selectVertical('buy_side');
-}
-
-function selectVertical(id){
-  activeVertical = VERTICALS.find(v=>v.id===id) || VERTICALS[0];
-  document.querySelectorAll('.vertical-chip').forEach(b=>{
-    b.classList.toggle('active', b.dataset.id===activeVertical.id);
-  });
-  const hero=document.getElementById('aigcHeroTitle');
-  const sub=document.getElementById('aigcHeroSub');
-  if(hero) hero.textContent = `${activeVertical.emoji} ${activeVertical.name} · ${activeVertical.tag}`;
-  if(sub) sub.textContent = `已切换到「${activeVertical.name}」语料域。回答会带上该领域的真实参考来源。`;
-  const pq=document.getElementById('presetQ');
-  pq.innerHTML = activeVertical.q.map(q=>`<button>${q}</button>`).join('');
-  pq.querySelectorAll('button').forEach(b=>b.onclick=()=>submitAigc(b.textContent));
-}
-
-function submitAigc(text){
-  text=(text||'').trim();
-  if(!text || !activeVertical) return;
-  const input=document.getElementById('aigcInput');
-  const send=document.getElementById('aigcSend');
-  input.value='';
-  const stream=document.getElementById('chatStream');
-  const u=document.createElement('div');u.className='bubble user';u.textContent=text;stream.appendChild(u);
-  const a=document.createElement('div');a.className='bubble ai';
-  a.innerHTML=`<span class="ai-tag">${activeVertical.emoji} ${activeVertical.name} · AI</span><div class="typing"><i></i><i></i><i></i></div>`;
-  stream.appendChild(a);
-  send.disabled=true;
-  a.scrollIntoView({behavior:'smooth',block:'end'});
-  // pick preset answer if matches one of preset q, else a generic
-  const v=activeVertical;
-  const matched = v.q.includes(text);
-  const ansBody = matched ? v.a : `（演示回答）针对你的问题「${text}」，在「${v.name}」语料域中可以这样思考：\n${v.a}`;
-  setTimeout(()=>{
-    a.innerHTML = `
-      <span class="ai-tag">${v.emoji} ${v.name} · AI</span>
-      <div>${ansBody.replace(/\n/g,'<br/>')}</div>
-      <div class="src"><b>参考来源（demo）：</b><br/>${v.src.map((s,i)=>`${i+1}. ${s}`).join('<br/>')}</div>`;
-    send.disabled=false;
-    a.scrollIntoView({behavior:'smooth',block:'end'});
-  }, 900);
-}
