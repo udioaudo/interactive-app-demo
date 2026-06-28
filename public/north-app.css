@@ -1,19 +1,21 @@
 
 :root{
-  --paper:#f7efe5;--paper2:#eee1d2;--ink:#111114;--ink2:#1a191d;--cream:#f1e7db;
-  --copper:#a66737;--gold:#dca956;--gold2:#ffd37b;--muted:#71665b;--white:#fff;
+  --paper:#f5f3ff;--paper2:#ede9fe;--ink:#1a1633;--ink2:#241c47;--cream:#e0e7ff;
+  --copper:#6366f1;--gold:#ec4899;--gold2:#22d3ee;--muted:#6b6890;--white:#fff;
+  --accent-mint:#10b981;
 }
 *{box-sizing:border-box}
 body{
   margin:0;min-height:100vh;color:var(--ink);
   font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif;
   background:
-    radial-gradient(circle at 12% 18%,rgba(174,111,58,.15),transparent 27%),
-    linear-gradient(135deg,#eee0ce,#fffaf3 52%,#e8d8c5);
+    radial-gradient(circle at 12% 18%,rgba(99,102,241,.18),transparent 32%),
+    radial-gradient(circle at 88% 78%,rgba(236,72,153,.16),transparent 30%),
+    linear-gradient(135deg,#e9e4ff,#fdf2ff 52%,#dff6ff);
 }
 body:before{
-  content:"";position:fixed;inset:0;pointer-events:none;opacity:.34;
-  background:repeating-radial-gradient(ellipse at 20% 20%,rgba(140,89,49,.07) 0 2px,transparent 3px 20px);
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.30;
+  background:repeating-radial-gradient(ellipse at 20% 20%,rgba(99,102,241,.07) 0 2px,transparent 3px 20px);
 }
 .app-shell{
   min-height:100vh;max-width:1520px;margin:auto;padding:28px;
