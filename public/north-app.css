@@ -176,8 +176,42 @@ h3{font-size:13px;margin:20px 0 9px}.muted{color:var(--muted);font-size:13px;lin
 .career-detail .detail-row span{color:var(--muted)}
 .career-detail .detail-row b{font-weight:600;line-height:1.5;color:#2b1d10}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.chip-row .chip{font-size:10px;padding:5px 9px;border-radius:999px;background:#17171b;color:#f4ead8;letter-spacing:.02em}
+.chip-row .chip{font-size:10px;padding:5px 9px;border-radius:999px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;letter-spacing:.02em;border:0}
 .pc-list{margin:6px 0 0;padding-left:16px}
-.pc-list li{font-size:11px;line-height:1.55;color:#3a2a1b;margin:2px 0}
-.pc-list.pros li::marker{color:#2f8f5f}
-.pc-list.cons li::marker{color:#c66a3a}
+.pc-list li{font-size:11px;line-height:1.55;color:#2a1f4a;margin:2px 0}
+.pc-list.pros li::marker{color:#10b981}
+.pc-list.cons li::marker{color:#ec4899}
+
+/* ============== AIGC 垂类问答 ============== */
+.aigc-hero{margin-top:10px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#6366f1,#ec4899 70%,#22d3ee);color:#fff;position:relative;overflow:hidden}
+.aigc-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.25),transparent 40%);pointer-events:none}
+.aigc-hero .badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.12em;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+.aigc-hero h3{margin:8px 0 4px;font:600 19px/1.25 Georgia,"Songti SC",serif}
+.aigc-hero p{margin:0;font-size:11px;line-height:1.55;color:rgba(255,255,255,.92)}
+.vertical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.vertical-chip{padding:10px 6px;border-radius:14px;border:1px solid rgba(99,102,241,.16);background:#fff;cursor:pointer;text-align:center;transition:.18s;font-family:inherit}
+.vertical-chip .v-emoji{font-size:18px;display:block;margin-bottom:4px}
+.vertical-chip .v-name{font-size:10px;font-weight:700;color:var(--ink)}
+.vertical-chip:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(99,102,241,.18)}
+.vertical-chip.active{background:linear-gradient(135deg,#6366f1,#ec4899);border-color:transparent;color:#fff}
+.vertical-chip.active .v-name{color:#fff}
+.preset-q{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.preset-q button{border:0;font-family:inherit;background:rgba(99,102,241,.10);color:var(--copper);padding:6px 10px;border-radius:999px;font-size:10px;cursor:pointer;transition:.15s}
+.preset-q button:hover{background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff}
+.aigc-input{margin-top:10px;display:flex;gap:6px;align-items:flex-end;padding:8px;border-radius:18px;background:#fff;border:1px solid rgba(99,102,241,.16);box-shadow:0 4px 14px rgba(99,102,241,.06)}
+.aigc-input textarea{flex:1;border:0;outline:0;resize:none;font:inherit;font-size:12px;line-height:1.5;padding:6px 8px;max-height:80px;background:transparent;color:var(--ink)}
+.aigc-input button{border:0;padding:9px 14px;border-radius:14px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;font-weight:700;font-size:11px;cursor:pointer;box-shadow:0 6px 14px rgba(99,102,241,.3)}
+.aigc-input button:disabled{opacity:.55;cursor:wait}
+.chat-stream{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.bubble{padding:10px 12px;border-radius:16px;font-size:11px;line-height:1.6;max-width:88%;animation:bubbleIn .25s ease}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.bubble.user{align-self:flex-end;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;border-bottom-right-radius:5px}
+.bubble.ai{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid rgba(99,102,241,.12);border-bottom-left-radius:5px;box-shadow:0 4px 12px rgba(99,102,241,.06)}
+.bubble.ai .ai-tag{display:inline-block;font-size:8px;font-weight:800;letter-spacing:.1em;padding:2px 7px;border-radius:999px;background:linear-gradient(135deg,#ec4899,#22d3ee);color:#fff;margin-bottom:6px}
+.bubble.ai .src{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(99,102,241,.18);font-size:9px;color:var(--muted);line-height:1.5}
+.bubble.ai .src b{color:var(--copper)}
+.typing{display:inline-flex;gap:3px;align-items:center;padding-top:4px}
+.typing i{width:5px;height:5px;border-radius:50%;background:#ec4899;animation:blink 1s infinite}
+.typing i:nth-child(2){background:#6366f1;animation-delay:.15s}
+.typing i:nth-child(3){background:#22d3ee;animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
