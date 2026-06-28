@@ -205,7 +205,8 @@ function renderPaths(){
     <div class="path-tree"><div id="pathViewport" class="path-viewport">
       <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
       <svg id="treeLines" class="tree-lines"></svg><div id="treeScene" class="tree-scene"></div>
-    </div><div class="path-hint">拖动旋转 · 滚轮缩放 · 点击任一职业节点</div></div>`;
+    </div><div class="path-hint">拖动旋转 · 滚轮缩放 · 点击任一职业节点查看下方详情</div></div>
+    <section id="careerDetail" class="career-detail"></section>`;
   initTree();inspectCareer('bank_hq');
 }
 function initTree(){
