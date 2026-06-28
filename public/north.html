@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>North Finance Career OS</title>
+  <link rel="stylesheet" href="/north-app.css"/>
+  <style>
+    /* Hide side rails — only show the phone */
+    .app-shell{grid-template-columns:1fr !important;justify-items:center}
+    .left-rail,.right-panel{display:none !important}
+    .phone-stage{width:100%}
+    /* Small thought: a soft halo around the phone + clickable island easter-egg */
+    .phone{transition:box-shadow .4s ease}
+    .phone.sparkle{box-shadow:0 35px 100px rgba(34,20,8,.27),0 0 0 6px rgba(220,169,86,.18),0 0 80px rgba(220,169,86,.35)}
+    .island{cursor:pointer}
+    .island:after{
+      content:"";position:absolute;inset:-2px;border-radius:999px;
+      box-shadow:0 0 0 0 rgba(220,169,86,.55);transition:.5s;
+    }
+    .island.pulse:after{box-shadow:0 0 0 14px rgba(220,169,86,0)}
+    .daily-quote{
+      position:absolute;top:46px;left:50%;transform:translateX(-50%);
+      max-width:78%;padding:10px 14px;border-radius:14px;z-index:6;
+      background:rgba(23,23,27,.92);color:#f1e7db;font-size:11px;line-height:1.5;
+      text-align:center;opacity:0;pointer-events:none;transition:.3s;
+      box-shadow:0 8px 24px rgba(0,0,0,.25);
+    }
+    .daily-quote.show{opacity:1;transform:translateX(-50%) translateY(2px)}
+    /* Toast for icon feedback */
+    .nav-toast{
+      position:absolute;left:50%;bottom:68px;transform:translateX(-50%);
+      padding:7px 12px;border-radius:999px;background:rgba(23,23,27,.9);color:#f1e7db;
+      font-size:10px;opacity:0;transition:.25s;pointer-events:none;z-index:6;
+    }
+    .nav-toast.show{opacity:1;bottom:74px}
+  </style>
+</head>
+<body>
+  <section id="splash" class="splash">
+    <div class="splash-marble"></div>
+    <div class="splash-content">
+      <div class="splash-mark">▲</div>
+      <p class="eyebrow">North · Career Direction System</p>
+      <h1>看见路径，也看见今天这一小步为什么值得。</h1>
+      <p>从学历、实习和技能出发，生成金融职业坐标、每日行动与可写入简历的成长证据。</p>
+      <button id="enterApp">开始探索</button>
+    </div>
+  </section>
+  <main class="app-shell">
+    <aside class="left-rail"><nav id="nav"></nav><div class="profile-summary"><span></span><b id="profileSummary"></b><small></small></div></aside>
+
+    <section class="phone-stage">
+      <div class="phone" id="phone">
+        <div class="island" id="island" title="点一下试试"></div>
+        <div class="daily-quote" id="dailyQuote"></div>
+        <div class="status"><span>9:41</span><span>5G ▰</span></div>
+        <div id="screen"></div>
+        <div class="nav-toast" id="navToast"></div>
+        <div class="bottom-nav">
+          <button data-index="0" title="Onboarding · 建立坐标">◎</button>
+          <button data-index="1" title="All Paths · 职业全息图">◇</button>
+          <button data-index="2" title="Today · 今日任务">♙</button>
+          <button data-index="3" title="People & Events · 人脉与活动">▤</button>
+          <button data-index="4" title="Growth · 成长复盘">◉</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="right-panel">
+      <h2 id="nodeTitle"></h2><p id="nodeReason"></p>
+      <div class="metrics"><div><span></span><b id="fitScore"></b></div><div><span></span><b id="salary"></b></div></div>
+      <div class="detail-row"><span></span><b id="development"></b></div>
+      <div class="detail-row"><span></span><b id="intensity"></b></div>
+      <div class="detail-row"><span></span><b id="stability"></b></div>
+      <div class="detail-row"><span></span><b id="market"></b></div>
+      <div id="skillsList"></div><div id="prosList"></div><div id="consList"></div>
+    </aside>
+  </main>
+  <script src="/north-app.js"></script>
+  <script>
+    // Small enhancements: bottom-nav label toast + dynamic island easter egg
+    const NAV_LABELS = ['Onboarding','All Paths','Today','People & Events','Growth'];
+    const toast = document.getElementById('navToast');
+    document.querySelectorAll('.bottom-nav button').forEach((b,i)=>{
+      b.addEventListener('click',()=>{
+        toast.textContent = (i+1)+' · '+NAV_LABELS[i];
+        toast.classList.add('show');
+        clearTimeout(b._t);
+        b._t = setTimeout(()=>toast.classList.remove('show'),900);
+      });
+    });
+    const QUOTES = [
+      '今天的一份 mini memo，就是明年面试的一个故事。',
+      '路径不是被选出来的，是被证据点亮的。',
+      '稳定不等于停滞，方向感才是真正的稳。',
+      '认识一个对的人，胜过刷十份招聘信息。',
+      '把模糊的兴趣，写成可被验证的判断。'
+    ];
+    const island = document.getElementById('island');
+    const quote = document.getElementById('dailyQuote');
+    const phone = document.getElementById('phone');
+    let qi = 0;
+    island.addEventListener('click',()=>{
+      quote.textContent = QUOTES[qi % QUOTES.length]; qi++;
+      quote.classList.add('show');
+      island.classList.remove('pulse'); void island.offsetWidth; island.classList.add('pulse');
+      phone.classList.add('sparkle');
+      clearTimeout(island._t);
+      island._t = setTimeout(()=>{
+        quote.classList.remove('show');
+        phone.classList.remove('sparkle');
+      }, 2600);
+    });
+  </script>
+</body>
+</html>
