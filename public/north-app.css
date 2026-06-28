@@ -158,3 +158,22 @@ h3{font-size:13px;margin:20px 0 9px}.muted{color:var(--muted);font-size:13px;lin
 .course-card a{
   display:inline-block;padding:7px 9px;border-radius:999px;background:#17171b;color:white;text-decoration:none;font-size:9px
 }
+
+/* 职业详情（手机屏内） */
+.career-detail{margin-top:14px;padding:14px;border-radius:18px;background:linear-gradient(180deg,#fff,#faf6f0);border:1px solid rgba(80,55,33,.10);box-shadow:0 6px 20px rgba(80,55,33,.06);scroll-margin-top:8px}
+.career-detail.flash{animation:detailFlash .9s ease}
+@keyframes detailFlash{0%{box-shadow:0 0 0 0 rgba(215,170,114,.55)}100%{box-shadow:0 6px 20px rgba(80,55,33,.06)}}
+.career-detail .detail-head h3{margin:4px 0 6px;color:#2b1d10;font-weight:700}
+.career-detail .detail-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 4px}
+.career-detail .detail-metrics > div{padding:10px;border-radius:12px;background:#fff;border:1px solid rgba(80,55,33,.08)}
+.career-detail .detail-metrics span{display:block;font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.career-detail .detail-metrics b{font-size:15px;color:#2b1d10}
+.career-detail .detail-row{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(80,55,33,.10);font-size:11px}
+.career-detail .detail-row span{color:var(--muted)}
+.career-detail .detail-row b{font-weight:600;line-height:1.5;color:#2b1d10}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip-row .chip{font-size:10px;padding:5px 9px;border-radius:999px;background:#17171b;color:#f4ead8;letter-spacing:.02em}
+.pc-list{margin:6px 0 0;padding-left:16px}
+.pc-list li{font-size:11px;line-height:1.55;color:#3a2a1b;margin:2px 0}
+.pc-list.pros li::marker{color:#2f8f5f}
+.pc-list.cons li::marker{color:#c66a3a}
