@@ -22,7 +22,7 @@
       box-shadow:0 24px 70px rgba(34,20,8,.25), 0 0 0 1px rgba(0,0,0,.25);
       transition:box-shadow .4s ease;
     }
-    .phone.sparkle{box-shadow:0 24px 70px rgba(34,20,8,.25),0 0 0 6px rgba(220,169,86,.18),0 0 80px rgba(220,169,86,.35)}
+    .phone.sparkle{box-shadow:0 24px 70px rgba(34,20,8,.25),0 0 0 6px rgba(99,102,241,.20),0 0 80px rgba(236,72,153,.35)}
 
     /* Replace iOS Dynamic Island with a neutral top speaker bar (still clickable) */
     .island{
@@ -31,9 +31,9 @@
     }
     .island:after{
       content:"";position:absolute;inset:-6px -20px;border-radius:999px;
-      box-shadow:0 0 0 0 rgba(220,169,86,.55);transition:.5s;
+      box-shadow:0 0 0 0 rgba(236,72,153,.55);transition:.5s;
     }
-    .island.pulse:after{box-shadow:0 0 0 14px rgba(220,169,86,0)}
+    .island.pulse:after{box-shadow:0 0 0 14px rgba(236,72,153,0)}
 
     .status{height:34px;padding:10px 18px 0;font-size:11px}
     #screen{height:calc(100% - 90px) !important;padding:12px 16px 14px}
@@ -87,7 +87,7 @@
           <button data-index="0" title="Onboarding · 建立坐标">◎</button>
           <button data-index="1" title="All Paths · 职业全息图">◇</button>
           <button data-index="2" title="Today · 今日任务">♙</button>
-          <button data-index="3" title="People & Events · 人脉与活动">▤</button>
+          <button data-index="3" title="AI 顾问 · 金融垂类问答">▤</button>
           <button data-index="4" title="Growth · 成长复盘">◉</button>
         </div>
       </div>
@@ -106,7 +106,7 @@
   <script src="/north-app.js"></script>
   <script>
     // Small enhancements: bottom-nav label toast + dynamic island easter egg
-    const NAV_LABELS = ['Onboarding','All Paths','Today','People & Events','Growth'];
+    const NAV_LABELS = ['Onboarding','All Paths','Today','AI 顾问','Growth'];
     const toast = document.getElementById('navToast');
     document.querySelectorAll('.bottom-nav button').forEach((b,i)=>{
       b.addEventListener('click',()=>{
